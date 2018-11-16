@@ -1,0 +1,144 @@
+1.解构
+
+- 了解解构
+      a = 10
+      b = 20
+      a,b=b,a
+      print(a,b)   #此时将a和b的值进行交换
+- 利用解构进行赋值
+      直接把元组或者列表中的数据拿出来.
+       a, b, c = (10, 20, 30) 必须一一对应  即 a=10,b=20,c=30
+- 利用解构进行冒泡排序
+      从上面的例子引出冒泡排序:
+      冒泡排序算法的原理如下：
+      比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+      对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
+      针对所有的元素重复以上的步骤，除了最后一个。
+      持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较
+      例子:对齐进行排序
+      lst = [7,9,6,3,8,4,2,5,1,0,435,345,123,567,457,456,678]
+      for i in range(len(lst)):
+          for j in range(len(lst)-1):
+              if lst[j]>lst[j+1]:
+                  lst[j],lst[j+1]=lst[j+1],lst[j]
+      print(lst)
+      此时程序还可以优化，不用循环这么多次：
+      for i in range(len(lst)-1):
+          for j in range(len(lst) - 1 - i):
+              if lst[j]>lst[j + 1]:
+                  lst[j], lst[j + 1]= lst[j + 1], lst[j]
+      print(lst)
+
+2.比较（三目运算）
+
+    a = 10
+    b = 20
+    c = a if a>b else b
+    print(c)  #用于判断    此时c为20
+
+3.返回最大最小值
+
+    a = 10
+    b = 20
+    print(max(a,b))  返回20
+    print(min(a,b))   返回10
+
+
+
+4.求和
+
+sum (Iterable,start) :把可迭代的对象进行循环,计算和,然后和后面的数相加,不写的话默认为0 
+
+    例子：计算两个列表的和
+    lst1=[2,3,4]
+    lst2=[1,2,3,4]
+    print(sum(lst1,sum(lst2))
+
+5.绝对值
+
+abs():返回绝对值  
+
+6.列表推到式
+
+    [结果 for循环 if筛选] 
+    例子:100以内能被3整除的数的平方
+    lst = [i*i for i in range(1, 101) if i % 3 == 0]
+    print(lst)
+    
+
+7.字典推到式
+
+     {key: value for循环 if 筛选} 
+    例子:集合中的key和value进行调换
+    dic = {"张无忌":"九阳神功", "乔峰":"降龙十八掌", "楚留香":"帅"}
+    d = {dic[k]: k for k in dic}
+    print(d) 
+
+8.集合推到式
+
+{key for循环 if 筛选} 作用是去重 
+
+例子.
+
+    lst = [1,-1,6,-6,123,3245,-9,0,9]
+    s={abs(i) for i in lst}
+    print(s)  #{0, 1, 6, 9, 3245, 123}
+
+9.元祖推到式
+
+元祖无推导式,因为其不可变. 
+
+10.枚举
+
+enumerate():获取集合的枚举对象,拿到的是元祖
+
+例子:
+
+    lst = ["叮当猫","机器猫","美少女战士"]
+    for el in enumerate(lst): #拿到的是元祖
+        print(el)  # (0, '叮当猫')(1, '机器猫')(2, '美少女战士')
+    for index,el in enumerate(lst):  #结构
+        print(index,el) # 0 叮当猫  1 机器猫 2 美少女战士
+
+11顺序查找
+
+从列表第一个元素开始，顺序进行搜索，直到找到为止。效率慢
+
+    lst = [1,8,16,32,55,78,89,7,9,6,4,44,2,5,5,7,8]
+    lst2=sorted(list(set(lst))) #去重并排序
+    print(lst2)
+    n = int(input("请输入一个数字:"))
+    for i in lst:
+        if i==n:
+            print("存在")
+            break
+    else:
+        print("不存在")
+
+
+
+12.二分法查找
+
+每次能够排除掉一半的数据. 查找的效率非常高. 但是局限性比较大, 必须是有序序列才可以使用二分法查找.
+
+核心思想:掐头结尾取中间.
+
+    lst = [1,8,16,32,55,78,89,7,9,6,4,44,2,5,5,7,8]
+    lst2=sorted(list(set(lst))) #去重并排序
+    # print(lst2) [1, 2, 4, 5, 6, 7, 8, 9, 16, 32, 44, 55, 78, 89]
+    left = 0
+    right = len(lst2)-1  #13
+    n = int(input("请输入一个数字:"))
+    while left<=right:
+        mid = (left+right) //2 #索引只能是整数
+        if n >lst2[mid]:
+            left=mid+1
+        elif n<lst2[mid]:
+            right =mid-1
+        else:
+            print("存在")
+            break
+    else:
+        print("不存在")
+
+
